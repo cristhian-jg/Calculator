@@ -10,12 +10,12 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tvPantalla;
-    private int resultado;
+    private double resultado;
     private Button btCero, btUno, btDos,
             btTres, btCuatro, btCinco,
             btSeis, btSiete, btOcho, btNueve,
             btSuma, btResta, btMultiplica,
-            btDivide, btBorrar, btPunto, btIgual;
+            btDivide, btBorrar, btPunto, btIgual, btMasMenos, btPorcentaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
         tvPantalla = findViewById(R.id.tvPantalla);
         btBorrar = findViewById(R.id.btBorrar);
+        btMasMenos = findViewById(R.id.btMasMenos);
+        btPorcentaje = findViewById(R.id.btPorcentaje);
         btSuma = findViewById(R.id.btSuma);
         btResta = findViewById(R.id.btResta);
         btMultiplica = findViewById(R.id.btMultiplica);
@@ -55,6 +57,26 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btBorrar:
                         numero = new StringBuilder();
                         tvPantalla.setText(numero);
+                        break;
+                    case R.id.btMasMenos:
+                        if (numero.length() != 0) {
+                            String parsedToString = numero.toString();
+                            int parsedToInt = Integer.parseInt(parsedToString);
+
+                            numero = new StringBuilder();
+                            numero.append(calculadora.cambiarMasMenos(parsedToInt));
+                            tvPantalla.setText(numero);
+                        }
+                        break;
+                    case R.id.btPorcentaje:
+                        if (numero.length() != 0) {
+                            String parsedToString = numero.toString();
+                            double parsedToDouble= Double.parseDouble(parsedToString);
+
+                            numero = new StringBuilder();
+                            numero.append(calculadora.porcentaje(parsedToDouble));
+                            tvPantalla.setText(numero);
+                        }
                         break;
                     case R.id.btPunto:
                         numero.append(".");
@@ -125,50 +147,61 @@ public class MainActivity extends AppCompatActivity {
                         numero = new StringBuilder();
                         break;
                     case R.id.btIgual:
+                        //Comprobamos si realmente se ha introducido un numero
+                        if (numero.length() != 0) {
+                            double auxiliarParser = Double.parseDouble(auxiliar);
+                            double numeroParser = Double.parseDouble(numero.toString());
 
-                        int reservaParser = Integer.parseInt(auxiliar);
-                        int numeroParser = Integer.parseInt(numero.toString());
-
-                        switch (operador) {
-                            case "+":
-                                resultado = calculadora.suma(reservaParser, numeroParser);
-                                tvPantalla.setText(String.valueOf(resultado));
-                                numero = new StringBuilder();
-                                numero.append(resultado);
-                                break;
-                            case "-":
-                                resultado = calculadora.resta(reservaParser, numeroParser);
-                                tvPantalla.setText(String.valueOf(resultado));
-                                numero = new StringBuilder();
-                                numero.append(resultado);
-                                break;
-                            case "×":
-                                resultado = calculadora.multiplica(reservaParser, numeroParser);
-                                tvPantalla.setText(String.valueOf(resultado));
-                                numero = new StringBuilder();
-                                numero.append(resultado);
-                                break;
-                            case "÷":
-                                resultado = calculadora.divide(reservaParser, numeroParser);
-                                tvPantalla.setText(String.valueOf(resultado));
-                                numero = new StringBuilder();
-                                numero.append(resultado);
-                                break;
+                            switch (operador) {
+                                case "+":
+                                    resultado = calculadora.suma(auxiliarParser, numeroParser);
+                                    tvPantalla.setText(String.valueOf(resultado));
+                                    numero = new StringBuilder();
+                                    numero.append(resultado);
+                                    break;
+                                case "-":
+                                    resultado = calculadora.resta(auxiliarParser, numeroParser);
+                                    tvPantalla.setText(String.valueOf(resultado));
+                                    numero = new StringBuilder();
+                                    numero.append(resultado);
+                                    break;
+                                case "×":
+                                    resultado = calculadora.multiplica(auxiliarParser, numeroParser);
+                                    tvPantalla.setText(String.valueOf(resultado));
+                                    numero = new StringBuilder();
+                                    numero.append(resultado);
+                                    break;
+                                case "÷":
+                                    resultado = calculadora.divide(auxiliarParser, numeroParser);
+                                    tvPantalla.setText(String.valueOf(resultado));
+                                    numero = new StringBuilder();
+                                    numero.append(resultado);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-
+                        break;
                     default:
                         break;
                 }
             }
         };
 
+        //Acciones
         btBorrar.setOnClickListener(listener);
+        btMasMenos.setOnClickListener(listener);
+        btPunto.setOnClickListener(listener);
+
+        //Operaciones
+        btPorcentaje.setOnClickListener(listener);
         btSuma.setOnClickListener(listener);
         btResta.setOnClickListener(listener);
         btMultiplica.setOnClickListener(listener);
         btDivide.setOnClickListener(listener);
         btIgual.setOnClickListener(listener);
-        btPunto.setOnClickListener(listener);
+
+        //Numeros
         btCero.setOnClickListener(listener);
         btUno.setOnClickListener(listener);
         btDos.setOnClickListener(listener);

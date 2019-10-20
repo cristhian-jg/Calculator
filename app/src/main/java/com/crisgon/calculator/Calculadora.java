@@ -12,42 +12,28 @@ public class Calculadora {
         this.operando = "";
     }
 
-    public Calculadora(int operador1, int operador2, String operando) {
-        this.operador1 = operador1;
-        this.operador2 = operador2;
-        this.operando = operando;
-    }
-
-    public int suma(int operador1, int operador2){
-        return operador1 + operador2;
-    }
-
     public double suma(double operador1, double operador2) {
         return operador1 + operador2;
-    }
-
-    public int resta(int operador1, int operador2){
-        return operador1 - operador2;
     }
 
     public double resta(double operador1, double operador2) {
         return operador1 - operador2;
     }
 
-    public int multiplica(int operador1, int operador2){
-        return operador1 * operador2;
-    }
-
     public double multiplica(double operador1, double operador2) {
         return operador1 * operador2;
     }
 
-    public int divide(int operador1, int operador2){
+    public double divide(double operador1, double operador2) {
         return operador1 / operador2;
     }
 
-    public double divide(double operador1, double operador2) {
-        return operador1 / operador2;
+    public int cambiarMasMenos(int operador) {
+        return  operador * (-1);
+    }
+
+    public double porcentaje(double operador) {
+        return operador / 100;
     }
 
     public int getOperador1() {

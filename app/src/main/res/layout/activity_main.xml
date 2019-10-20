@@ -43,7 +43,7 @@
             android:textSize="30sp" />
 
         <Button
-            android:id="@+id/btPlusMinus"
+            android:id="@+id/btMasMenos"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="12dp"
@@ -55,7 +55,7 @@
             android:textSize="30sp" />
 
         <Button
-            android:id="@+id/btPercent"
+            android:id="@+id/btPorcentaje"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="12dp"
